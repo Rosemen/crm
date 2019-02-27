@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 配置控制台输出Debug级别的日志信息 -->
+<configuration>
+    　　　<appender name="INFO" class="ch.qos.logback.core.ConsoleAppender">
+    　　　　　 <encoder>
+    　　　　　　　　　<pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+    　　　　　 </encoder>
+    　　　</appender>
+
+    　　　<root level="DEBUG">
+    　　　　　　<appender-ref ref="INFO" />
+    　　　</root>
+</configuration>

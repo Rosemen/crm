@@ -1,0 +1,23 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scau.crm.mapper.LinkManMapper">
+    <select id="get" parameterType="String" resultMap="LinkManMap">
+      select * from t_linkman where lkm_id = #{linkId}
+    </select>
+
+    <select id="list" resultMap="LinkManMap">
+      select * from t_linkman
+    </select>
+
+    <resultMap id="LinkManMap" type="com.scau.crm.entity.LinkMan">
+        <id column="lkm_id" property="linkId"></id>
+        <result column="lkm_name" property="linkName"></result>
+        <result column="lkm_gender" property="linkGender"></result>
+        <result column="lkm_phone" property="linkPhone"></result>
+        <result column="lkm_mobile" property="linkMobile"></result>
+        <result column="lkm_email" property="linkEmail"></result>
+        <result column="lkm_position" property="linkPosition"></result>
+        <result column="lkm_memo" property="linkMemo"></result>
+    </resultMap>
+</mapper>
