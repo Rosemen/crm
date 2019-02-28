@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查询页面</title>
+    <LINK th:href="@{/css/Style.css}" href="/css/Style.css" type=text/css rel=stylesheet>
+    <LINK th:href="@{/css/Manage.css}" href="/css/Manage.css" type=text/css rel=stylesheet>
+    <script type="text/javascript" th:src="@{/js/jquery-1.4.4.min.js}" src="/js/jquery-1.4.4.min.js">
+    </script>
+</head>
+<body>
+<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+    <TBODY>
+    <TR>
+        <TD width=15>
+            <IMG th:src="@{/images/new_019.jpg}" src="/images/new_019.jpg" border=0>
+        </TD>
+        <TD width="100%" style="background: url('/images/new_020.jpg');height: 20px">
+            <IMG th:src="@{/images/new_020.jpg}" src="/images/new_020.jpg" border=0>
+        </TD>
+        <TD width=15>
+            <IMG th:src="@{/images/new_021.jpg}" src="/images/new_021.jpg" border=0>
+        </TD>
+    </TR>
+    </TBODY>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+    <TBODY>
+    <TR>
+        <TD width=15 background="/images/new_022.jpg">
+            <IMG th:src="@{/images/new_022.jpg}" src="/images/new_022.jpg" border=0>
+        </TD>
+        <TD vAlign=top width="100%" bgColor=#ffffff>
+            <TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
+                <TR>
+                    <TD class=manageHead>当前位置：客户管理 &gt; 客户列表</TD>
+                </TR>
+                <TR>
+                    <TD height=2></TD>
+                </TR>
+            </TABLE>
+            <TABLE borderColor=#cccccc cellSpacing=0 cellPadding=0
+                   width="100%" align=center border=0>
+                <TBODY>
+                <TR>
+                    <TD height=25>
+                        <FORM id="pageForm" name="customerForm"
+                              action=""
+                              method=post>
+                            <!-- 隐藏域.当前页码 -->
+                            <input type="hidden" name="current_page" id="currentPageInput"/>
+                            <!-- 隐藏域.每页显示条数 -->
+                            <input type="hidden" name="page_size" id="pageSizeInput" value="3"/>
+                            <TABLE cellSpacing=0 cellPadding=2 border=0>
+                                <TBODY>
+                                <TR>
+                                    <TD>客户名称：</TD>
+                                    <TD>
+                                        <INPUT class=textbox id=sChannel2
+                                               style="WIDTH: 80px" maxLength=50 name="cust_name" value="">
+                                    </TD>
+                                    <TD>
+                                        <INPUT class=button id=sButton2 type=submit
+                                               value=" 筛选 " name=sButton2>
+                                    </TD>
+                                </TR>
+                                </TBODY>
+                            </TABLE>
+                        </FORM>
+                    </TD>
+                </TR>
+
+                <TR>
+                    <TD>
+                        <TABLE id=grid
+                               style="BORDER-TOP-WIDTH: 0px; FONT-WEIGHT: normal; BORDER-LEFT-WIDTH: 0px; BORDER-LEFT-COLOR: #cccccc; BORDER-BOTTOM-WIDTH: 0px; BORDER-BOTTOM-COLOR: #cccccc; WIDTH: 100%; BORDER-TOP-COLOR: #cccccc; FONT-STYLE: normal; BACKGROUND-COLOR: #cccccc; BORDER-RIGHT-WIDTH: 0px; TEXT-DECORATION: none; BORDER-RIGHT-COLOR: #cccccc"
+                               cellSpacing=1 cellPadding=2 rules=all border=0>
+                            <TBODY>
+                            <TR style="FONT-WEIGHT: bold; FONT-STYLE: normal; BACKGROUND-COLOR: #eeeeee; TEXT-DECORATION: none">
+                                <TD>客户名称</TD>
+                                <TD>客户级别</TD>
+                                <TD>客户来源</TD>
+                                <TD>客户行业</TD>
+                                <TD>手机</TD>
+                                <TD>操作</TD>
+                            </TR>
+                            <TR th:each="customer:${pageInfo.list}" style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
+                                <TD th:text="${customer.custName}"></TD>
+                                <TD th:text="${customer.custLevel}"></TD>
+                                <TD th:text="${customer.custSource}"></TD>
+                                <TD th:text="${customer.custIndustry}"></TD>
+                                <TD th:text="${customer.custPhone}"></TD>
+                                <TD>操作</TD>
+                            </TR>
+                            </TBODY>
+                        </TABLE>
+                    </TD>
+                </TR>
+
+                <TR>
+                    <TD>
+                        <SPAN id=pagelink>
+                            <DIV style="LINE-HEIGHT: 20px; HEIGHT: 20px; TEXT-ALIGN: right">
+                                共[<B th:text="${pageInfo.size}"></B>]条记录,[<B th:text="${pageInfo.pages}"></B>]页
+                                ,每页显示
+                                <select name="pageSize"
+                                        onchange=""
+                                        id="pageSizeSelect">
+                                    <option value="3">3</option>
+                                    <option value="5">5</option>
+                                </select>
+                                条
+                                [<A href="javaScript:void(0)"
+                                    onclick="">前一页</A>]
+                                <B></B>
+                                [<A href="javaScript:void(0)"
+                                    onclick="">后一页</A>]
+                                到
+                                <input type="text" size="3" id="page" name="page"
+                                       value=""/>
+                                页<input type="button" value="Go"
+                                        onclick=""/>
+                            </DIV>
+						</SPAN>
+                    </TD>
+                </TR>
+                </TBODY>
+            </TABLE>
+        </TD>
+        <TD width=15 background="/images/new_023.jpg"><IMG
+                th:src="@{/images/new_023.jpg}" src="/images/new_023.jpg" border=0></TD>
+    </TR>
+    </TBODY>
+</TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+    <TBODY>
+    <TR>
+        <TD width=15>
+            <IMG th:src="@{/images/new_024.jpg}" src="/images/new_024.jpg" border=0>
+        </TD>
+        <TD align=middle width="100%" background="/images/new_025.jpg" height=15>
+            <IMG th:src="@{/images/new_025.jpg}" src="/images/new_025.jpg" border=0>
+        </TD>
+        <TD width=15>
+            <IMG th:src="@{/images/new_026.jpg}" src="/images/new_026.jpg" border=0>
+        </TD>
+    </TR>
+    </TBODY>
+</TABLE>
+</body>
+</html>
