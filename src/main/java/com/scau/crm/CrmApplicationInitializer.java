@@ -3,7 +3,10 @@ package com.scau.crm;
 
 import com.scau.crm.config.RootConfig;
 import com.scau.crm.config.WebConfig;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.Filter;
 
 /**
  * CrmApplicationInitializer:配置DispatcherServlet
@@ -25,5 +28,13 @@ public class CrmApplicationInitializer extends AbstractAnnotationConfigDispatche
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        return new Filter[]{characterEncodingFilter};
     }
 }

@@ -1,5 +1,7 @@
 package com.scau.crm.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.scau.crm.entity.LinkMan;
 import com.scau.crm.mapper.LinkManMapper;
 import com.scau.crm.service.LinkManService;
@@ -29,8 +31,28 @@ public class LinkManServiceImpl implements LinkManService {
     }
 
     @Override
-    public List<LinkMan> list() {
+    public PageInfo<LinkMan> list(Integer pageNum,Integer pageSize) {
+        if (null == pageNum){
+            pageNum = 1;
+        }
+        if (null == pageSize){
+            pageSize = 3;
+        }
+        PageHelper.startPage(pageNum,pageSize);
         List<LinkMan> linkManList = linkManMapper.list();
-        return linkManList;
+        PageInfo<LinkMan> pageInfo = new PageInfo<>(linkManList);
+        return pageInfo;
+    }
+
+    @Override
+    public boolean update(LinkMan linkMan) {
+        linkManMapper.update(linkMan);
+        return true;
+    }
+
+    @Override
+    public boolean delete(String linkId) {
+        linkManMapper.delete(linkId);
+        return true;
     }
 }

@@ -2,7 +2,7 @@
 <HTML xmlns:th="http://www.thymeleaf.org">
 <HEAD id=Head1>
     <TITLE>导航</TITLE>
-    <META http-equiv=Content-Type content="text/html; charset=utf-8">
+    <meta charset="UTF-8">
     <STYLE type=text/css>
         BODY {
             PADDING-RIGHT: 0px;
@@ -72,8 +72,16 @@
             COLOR: #ff0000;
         }
     </STYLE>
-
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <SCRIPT language=javascript>
+        function findAllCustomer(){
+            $("#customerForm").submit();
+        }
+
+        function findAllLinkMen(){
+            $("#linkManForm").submit();
+        }
+
         function MenuDisplay(obj_id) {
             for (var i = 1; i <= 9; i++) {
                 var obj = document.getElementById('table_' + i);
@@ -93,7 +101,6 @@
                     document.getElementById(obj_id + 'Span').innerText = '＋';
                 }
             }
-
         }
     </SCRIPT>
 
@@ -104,17 +111,19 @@
     <TABLE cellSpacing=0 cellPadding=0 width=210 align=center border=0>
         <TBODY>
         <TR>
-            <TD width=15><IMG src="../images/new_005.jpg" border=0></TD>
-            <TD align=middle width=180 background=../images/new_006.jpg
-                height=35><B>人力资源 －功能菜单</B></TD>
-            <TD width=15><IMG src="/images/new_007.jpg" border=0></TD>
+            <TD width=15><IMG th:src="@{/images/new_005.jpg}" src="../images/new_005.jpg" border=0></TD>
+            <TD align=middle width=180 th:style="'background:url('+@{/images/new_006.jpg}+');'" background=../images/new_006.jpg
+                height=35><B>人力资源 -功能菜单</B></TD>
+            <TD width=15><IMG th:src="@{/images/new_007.jpg}" src="/images/new_007.jpg" border=0></TD>
         </TR>
         </TBODY>
     </TABLE>
     <TABLE cellSpacing=0 cellPadding=0 width=210 align=center border=0>
         <TBODY>
         <TR>
-            <TD width=15 background=../images/new_008.jpg></TD>
+            <TD width=15 th:style="'background:url('+@{/images/new_008.jpg}+');'" background=../images/new_008.jpg>
+                <img th:src="@{/images/new_008.jpg}" border="0">
+            </TD>
             <TD vAlign=top width=180 bgColor=#ffffff>
                 <TABLE cellSpacing=0 cellPadding=3 width=165 align=center border=0>
                     <TBODY>
@@ -130,11 +139,11 @@
                                 <TBODY>
                                 <TR>
                                     <TD class=menuSmall><A class=style2 href=""
-                                                           target=main>－ 新增客户</A></TD>
+                                                           target=main>- 新增客户</A></TD>
                                 </TR>
                                 <TR>
-                                    <TD class=menuSmall><A class=style2 href=""
-                                                           target=main>－ 客户列表</A></TD>
+                                    <TD class=menuSmall><A class="style2" href="javascript:void(0);" onclick="findAllCustomer()"
+                                                           target="main">- 客户列表</A></TD>
                                 </TR>
 
                                 </TBODY>
@@ -142,7 +151,9 @@
                         </TD>
                     </TR>
                     <TR>
-                        <TD background=../images/new_027.jpg height=1></TD>
+                        <TD th:style="'background:url('+@{/images/new_027.jpg}+');'" background=../images/new_027.jpg height=1>
+                            <!--<img th:src="@{/images/new_027.jpg}" border="0">-->
+                        </TD>
                     </TR>
                     <TR>
                         <TD class=mainMenu onClick="MenuDisplay('table_2');"><SPAN
@@ -156,18 +167,20 @@
                                 <TBODY>
                                 <TR>
                                     <TD class=menuSmall><A class=style2 href=""
-                                                           target=main>－ 新增联系人</A></TD>
+                                                           target=main>- 新增联系人</A></TD>
                                 </TR>
                                 <TR>
-                                    <TD class=menuSmall><A class=style2 href=""
-                                                           target=main>－联系人列表</A></TD>
+                                    <TD class=menuSmall><A class=style2 href="javascript:void(0);" onclick="findAllLinkMen()"
+                                                           target=main>- 联系人列表</A></TD>
                                 </TR>
                                 </TBODY>
                             </TABLE>
                         </TD>
                     </TR>
                     <TR>
-                        <TD background=../images/new_027.jpg height=1></TD>
+                        <TD th:style="'background:url('+@{/images/new_027.jpg}+');'" background=../images/new_027.jpg height=1>
+                            <!--<img th:src="@{/images/new_027.jpg}" border="0">-->
+                        </TD>
                     </TR>
                     <TR>
                         <TD class=mainMenu onClick="MenuDisplay('table_5');"><SPAN
@@ -181,11 +194,11 @@
                                 <TBODY>
                                 <TR>
                                     <TD class=menuSmall><A class=style2 href="#"
-                                                           target=main>－新增客户拜访</A></TD>
+                                                           target=main>-新增客户拜访</A></TD>
                                 </TR>
                                 <TR>
                                     <TD class=menuSmall><A class=style2 href="#"
-                                                           target=main>－客户拜访列表</A></TD>
+                                                           target=main>-客户拜访列表</A></TD>
                                 </TR>
 
                                 </TBODY>
@@ -193,7 +206,9 @@
                         </TD>
                     </TR>
                     <TR>
-                        <TD background=../images/new_027.jpg height=1></TD>
+                        <TD th:style="'background:url('+@{/images/new_027.jpg}+');'" background=../images/new_027.jpg height=1>
+                            <!--<img th:src="@{/images/new_027.jpg}" border="0">-->
+                        </TD>
                     </TR>
                     <TR>
                         <TD class=mainMenu onClick="MenuDisplay('table_3');"><SPAN
@@ -222,7 +237,9 @@
                         </TD>
                     </TR>
                     <TR>
-                        <TD background=../images/new_027.jpg height=1></TD>
+                        <TD th:style="'background:url('+@{/images/new_027.jpg}+');'" background=../images/new_027.jpg height=1>
+                            <!--<img th:src="@{/images/new_027.jpg}" border="0">-->
+                        </TD>
                     </TR>
                     <TR>
                         <TD class=mainMenu onClick="MenuDisplay('table_4');"><SPAN
@@ -248,7 +265,9 @@
                         </TD>
                     </TR>
                     <TR>
-                        <TD background=../images/new_027.jpg height=1></TD>
+                        <TD th:style="'background:url('+@{/images/new_027.jpg}+');'" background=../images/new_027.jpg height=1>
+                            <!--<img th:src="@{/images/new_027.jpg}" border="0">-->
+                        </TD>
                     </TR>
                     <TR>
                         <TD class=mainMenu onClick="MenuDisplay('table_6');"><SPAN
@@ -279,20 +298,32 @@
                     </TBODY>
                 </TABLE>
             </TD>
-            <TD width=15 background=../images/new_009.jpg></TD>
+            <TD width=15 th:style="'background:url('+@{/images/new_009.jpg}+');'" background=../images/new_009.jpg>
+                <!--<img th:src="@{/images/new_009.jpg}" border="0">-->
+            </TD>
         </TR>
         </TBODY>
     </TABLE>
     <TABLE cellSpacing=0 cellPadding=0 width=210 align=center border=0>
         <TBODY>
         <TR>
-            <TD width=15><IMG src="../images/new_010.jpg" border=0></TD>
-            <TD align=middle width=180 background=../images/new_011.jpg
-                height=15></TD>
-            <TD width=15><IMG src="../images/new_012.jpg" border=0></TD>
+            <TD width=15><IMG th:src="@{/images/new_010.jpg}" src="../images/new_010.jpg" border=0></TD>
+            <TD align=middle width=180 th:style="'background:url('+@{/images/new_011.jpg}+');'" background=../images/new_011.jpg
+                height=15>
+                <IMG th:src="@{/images/new_011.jpg}" src="../images/new_011.jpg" border=0>
+            </TD>
+            <TD width=15><IMG th:src="@{/images/new_012.jpg}" src="../images/new_012.jpg" border=0></TD>
         </TR>
         </TBODY>
     </TABLE>
 </FORM>
+<form id="customerForm" th:action="@{/customer/list}" action="#" method="post" target="main">
+    <input type="hidden" name="pageNum" value="1">
+    <input type="hidden" name="pageSize" value="3">
+</form>
+<form id="linkManForm" th:action="@{/linkman/list}" action="#" method="post" target="main">
+    <input type="hidden" name="pageNum" value="1">
+    <input type="hidden" name="pageSize" value="3">
+</form>
 </BODY>
 </HTML>

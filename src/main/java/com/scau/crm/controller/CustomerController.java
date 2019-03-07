@@ -1,6 +1,5 @@
 package com.scau.crm.controller;
 
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.scau.crm.entity.Customer;
 import com.scau.crm.service.CustomerService;
@@ -10,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -26,18 +25,36 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping(value = "/get/{custId}",method = RequestMethod.GET)
-    public Customer get(@PathVariable("custId") String custId){
+    @RequestMapping(value = "/get/{custId}", method = RequestMethod.GET)
+    public String get(@PathVariable("custId") String custId, Model model) {
         Customer customer = customerService.get(custId);
-        return customer;
+        model.addAttribute("customer", customer);
+        return "customer/edit";
     }
 
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public String list(Model model){
-        PageHelper.startPage(0,3);
-        List<Customer> customerList = customerService.list();
-        PageInfo<Customer> pageInfo = new PageInfo<>(customerList);
-        model.addAttribute("pageInfo",pageInfo);
+    @RequestMapping(value = "/list", method = {RequestMethod.POST,RequestMethod.GET})
+    public String list(Model model, Integer pageNum, Integer pageSize) {
+        PageInfo<Customer> pageInfo = customerService.list(pageNum, pageSize);
+        model.addAttribute("pageInfo", pageInfo);
         return "customer/list";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/listAll", method = RequestMethod.POST)
+    public List<Customer> listAll(Model model) {
+        List<Customer> customerList = customerService.listAll();
+        return customerList;
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String update(Customer customer) {
+        customerService.update(customer);
+        return "forward:/customer/list";
+    }
+
+    @RequestMapping(value = "/delete/{custId}", method = RequestMethod.GET)
+    public String delete(@PathVariable("custId") String custId) {
+        boolean result = customerService.delete(custId);
+        return "forward:/customer/list";
     }
 }

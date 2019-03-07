@@ -1,4 +1,4 @@
-﻿// JScript 文件
+// JScript 文件
 //关闭层
 function CloseFrameDiv()
 {

@@ -1,5 +1,7 @@
 package com.scau.crm.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.scau.crm.entity.Customer;
 import com.scau.crm.mapper.CustomerMapper;
 import com.scau.crm.service.CustomerService;
@@ -30,8 +32,34 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> list() {
+    public PageInfo<Customer> list(Integer pageNum, Integer pageSize) {
+        if (null == pageNum) {
+            pageNum = 1;
+        }
+        if (null == pageSize) {
+            pageSize = 3;
+        }
+        PageHelper.startPage(pageNum, pageSize);
+        List<Customer> customerList = customerMapper.list();
+        PageInfo<Customer> pageInfo = new PageInfo<>(customerList);
+        return pageInfo;
+    }
+
+    @Override
+    public List<Customer> listAll() {
         List<Customer> customerList = customerMapper.list();
         return customerList;
+    }
+
+    @Override
+    public boolean update(Customer customer) {
+        customerMapper.update(customer);
+        return true;
+    }
+
+    @Override
+    public boolean delete(String custId) {
+        customerMapper.delete(custId);
+        return true;
     }
 }

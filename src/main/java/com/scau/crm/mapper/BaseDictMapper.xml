@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scau.crm.mapper.BaseDictMapper">
+    <sql id="querySQL">
+        SELECT * from base_dict
+    </sql>
+
+    <select id="list" resultMap="BaseDictMap" parameterType="String">
+        <include refid="querySQL"></include>
+        where dict_type_code = #{dictType}
+    </select>
+
+    <resultMap id="BaseDictMap" type="com.scau.crm.entity.BaseDict">
+        <id column="dict_id" property="dictId"></id>
+        <result column="dict_type_code" property="dictTypeCode"></result>
+        <result column="dict_type_name" property="dictTypeName"></result>
+        <result column="dict_item_name" property="dictItemName"></result>
+        <result column="dict_item_code" property="dictItemCode"></result>
+        <result column="dict_sort" property="dictSort"></result>
+        <result column="dict_enable" property="dictEnable"></result>
+        <result column="dict_memo" property="dictMemo"></result>
+    </resultMap>
+</mapper>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改页面</title>
+    <meta charset="UTF-8">
+    <LINK th:href="@{/css/Style.css}" href="/css/Style.css" type=text/css rel=stylesheet>
+    <LINK th:href="@{/css/Manage.css}" href="/css/Manage.css" type=text/css rel=stylesheet>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        $(function ($) {
+            var belongCustomer = [[${linkMan.belongCustomer}]];
+            var isEmpty = $.isEmptyObject(belongCustomer);
+            var custId = "";
+            if (!isEmpty){
+                custId = belongCustomer['custId'];
+            }
+            loadSelection("belong","belongCustomer.custId",custId);
+        });
+
+        /*
+        * 加载联系人所属客户信息
+        *
+        * @param
+        * parentId: <select>标签的父标签ID
+        * selectName:<select>标签的name属性
+        * custId:联系人所属客户ID
+        */
+        function loadSelection(parentId, selectName, custId) {
+            var $select = $("<select name='" + selectName + "'></select>");
+            $select.append("<option value=''>---------  请选择     ---------</option>");
+            var url = [[@{/customer/listAll}]];
+            $.post(url,
+                function (baseDictList) {
+                    $.each(baseDictList, function (index, customer) {
+                        var $option = $("<option value='"+customer['custId']+"'>"+customer["custName"]+"</option>");
+
+                        if(custId == customer["custId"])
+                            $option.attr("selected","selected");
+                        $select.append($option);
+                    });
+                }, "json");
+            $("#"+parentId).append($select);
+        }
+    </script>
+</head>
+<body>
+<FORM id=form1 name=form1
+      action="#" th:action="@{/linkman/update}"
+      method=post>
+
+    <input type="hidden" name="linkId" th:value="${linkMan.linkId}" value="">
+    <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+        <TBODY>
+        <TR>
+            <TD width=15><IMG th:src="@{/images/new_019.jpg}" src="/images/new_019.jpg"
+                              border=0></TD>
+            <TD width="100%" th:style="'background:url('+@{/images/new_020.jpg}+');'" background="/images/new_020.jpg"
+                height=20></TD>
+            <TD width=15><IMG th:src="@{/images/new_021.jpg}" src="/images/new_021.jpg"
+                              border=0></TD>
+        </TR>
+        </TBODY>
+    </TABLE>
+    <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+        <TBODY>
+        <TR>
+            <TD width=15 th:style="'background:url('+@{/images/new_022.jpg}+');'" background="/images/new_022.jpg"><IMG
+                    th:src="@{/images/new_022.jpg}" src="/images/new_022.jpg" border=0></TD>
+            <TD vAlign=top width="100%" bgColor=#ffffff>
+                <TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
+                    <TR>
+                        <TD class=manageHead>
+                            当前位置：联系人管理 &gt; 修改联系人
+                        </TD>
+                    </TR>
+                    <TR>
+                        <TD height=2></TD>
+                    </TR>
+                </TABLE>
+
+                <TABLE cellSpacing=0 cellPadding=5 border=0>
+
+
+                    <TR>
+                        <td>联系人名称:</td>
+                        <td>
+                            <INPUT class=textbox id=sChannel2
+                                   style="WIDTH: 180px" maxLength=50 name="linkName" th:value="${linkMan.linkName}">
+                        </td>
+                        <td>所属客户:</td>
+                        <td id="belong">
+
+                        </td>
+                    </TR>
+
+                    <TR>
+
+                        <td>性别:</td>
+                        <td>
+                            <select name="linkGender">
+                                <option value=''>---------  请选择  ---------</option>
+                                <option value="1" th:selected="${linkMan.linkGender}==1?'true':'false'">男</option>
+                                <option value="2" th:selected="${linkMan.linkGender}==2?'true':'false'">女</option>
+                            </select>
+                        </td>
+                        </td>
+                        <td>邮箱:</td>
+                        <td>
+                            <INPUT class=textbox id=sChannel3
+                                   style="WIDTH: 180px" maxLength=50 name="linkEmail" th:value="${linkMan.linkEmail}">
+                        </td>
+                    </TR>
+
+                    <TR>
+                        <td>手机:</td>
+                        <td>
+                            <INPUT class=textbox id=sChannel4
+                                   style="WIDTH: 180px" maxLength=50 name="linkPhone" th:value="${linkMan.linkPhone}">
+                        </td>
+                        <td>电话:</td>
+                        <td>
+                            <INPUT class=textbox id=sChannel5
+                                   style="WIDTH: 180px" maxLength=50 name="linkMobile" th:value="${linkMan.linkMobile}">
+                        </td>
+                    </TR>
+                    <tr>
+                        <td rowspan=2>
+                            <INPUT class=button id=sButton2 type=submit
+                                   value=" 保存 " name=sButton2>
+                        </td>
+                    </tr>
+                </TABLE>
+            </TD>
+            <TD width=15 th:style="'background:url('+@{/images/new_023.jpg}+');'" background="/images/new_023.jpg">
+                <IMG th:src="@{/images/new_023.jpg}" src="/images/new_023.jpg" border=0></TD>
+        </TR>
+        </TBODY>
+    </TABLE>
+    <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+        <TBODY>
+        <TR>
+            <TD width=15><IMG th:src="@{/images/new_024.jpg}" src="/images/new_024.jpg"
+                              border=0></TD>
+            <TD align="middle" width="100%" th:style="'background:url('+@{/images/new_025.jpg}+');'"
+                background="/images/new_025.jpg" height=15></TD>
+            <TD width=15><IMG th:src="@{/images/new_026.jpg}" src="/images/new_026.jpg"
+                              border=0></TD>
+        </TR>
+        </TBODY>
+    </TABLE>
+</FORM>
+</body>
+</html>

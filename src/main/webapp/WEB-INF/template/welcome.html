@@ -1,10 +1,10 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <HTML xmlns:th="http://www.thymeleaf.org">
 <HEAD id=Head1>
     <TITLE>模板 </TITLE>
-    <META http-equiv=Content-Type content="text/html; charset=utf-8">
-    <LINK href="../css/Style.css" type=text/css rel=stylesheet>
-    <LINK href="../css/Manage.css" type=text/css
+    <meta charset="UTF-8">
+    <LINK th:href="@{/css/Style.css}" href="../css/Style.css" type=text/css rel=stylesheet>
+    <LINK th:href="@{/css/Manage.css}" href="../css/Manage.css" type=text/css
           rel=stylesheet>
 
 
@@ -15,11 +15,11 @@
 <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
     <TBODY>
     <TR>
-        <TD width=15><IMG src="../images/new_019.jpg"
+        <TD width=15><IMG th:src="@{/images/new_019.jpg}" src="../images/new_019.jpg"
                           border=0></TD>
-        <TD width="100%" background=../images/new_020.jpg
+        <TD width="100%" th:style="'background:url('+@{/images/new_020.jpg}+');'" background=../images/new_020.jpg
             height=20></TD>
-        <TD width=15><IMG src="../images/new_021.jpg"
+        <TD width=15><IMG th:src="@{/images/new_021.jpg}" src="../images/new_021.jpg"
                           border=0></TD>
     </TR>
     </TBODY>
@@ -27,19 +27,19 @@
 <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
     <TBODY>
     <tr>
-        <TD width=15 background=../images/new_022.jpg>
-            <IMG src="../images/new_022.jpg" border=0>
+        <TD width=15 th:style="'background:url('+@{/images/new_022.jpg}+');'" background=../images/new_022.jpg>
+            <IMG th:src="@{/images/new_022.jpg}" src="../images/new_022.jpg" border=0>
         </TD>
         <TD align="center" bgColor=#ffffff>
             <table width="100%" height=300 border="0" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td align="center"><img src="../images/welcome.gif"
+                    <td align="center"><img th:src="@{/images/welcome.gif}" src="../images/welcome.gif"
                                             width="145" height="46"/></td>
                 </tr>
             </table>
         </td>
-        <TD width=15 background=../images/new_023.jpg>
-            <IMG src="../images/new_023.jpg" border=0>
+        <TD width=15 th:style="'background:url('+@{/images/new_023.jpg}+');'" background=../images/new_023.jpg>
+            <IMG th:src="@{/images/new_023.jpg}" src="../images/new_023.jpg" border=0>
         </TD>
     </tr>
     </TBODY>
@@ -47,11 +47,11 @@
 <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
     <TBODY>
     <TR>
-        <TD width=15><IMG src="../images/new_024.jpg"
+        <TD width=15><IMG th:src="@{/images/new_024.jpg}" src="../images/new_024.jpg"
                           border=0></TD>
-        <TD align=middle width="100%"
+        <TD align=middle width="100%" th:style="'background:url('+@{/images/new_025.jpg}+');'"
             background=../images/new_025.jpg height=15></TD>
-        <TD width=15><IMG src="../images/new_026.jpg"
+        <TD width=15><IMG th:src="@{/images/new_026.jpg}" src="../images/new_026.jpg"
                           border=0></TD>
     </TR>
     </TBODY>

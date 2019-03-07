@@ -1,4 +1,4 @@
-﻿// JScript 文件
+// JScript 文件
 document.writeln('<iframe id=ddd____meizzDateLayer Author=wayx frameborder=0 scrolling=auto src="about:blank" style="position: absolute; width: 192; height: 261; z-index: 9998; display: none; border:2px solid #333333;" width=192 height=261></iframe>');
 //window.frames.ddd____meizzDateLayer.document.close();		//解决ie进度条不结束的问题
 

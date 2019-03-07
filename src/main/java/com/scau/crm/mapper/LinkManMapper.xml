@@ -2,13 +2,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scau.crm.mapper.LinkManMapper">
-    <select id="get" parameterType="String" resultMap="LinkManMap">
-      select * from t_linkman where lkm_id = #{linkId}
-    </select>
 
-    <select id="list" resultMap="LinkManMap">
-      select * from t_linkman
-    </select>
+    <sql id="querySQL">
+        select l.*,c.cust_id,c.cust_name
+        from t_linkman l left outer join t_customer c
+        on l.clid = c.cust_id
+    </sql>
 
     <resultMap id="LinkManMap" type="com.scau.crm.entity.LinkMan">
         <id column="lkm_id" property="linkId"></id>
@@ -19,5 +18,29 @@
         <result column="lkm_email" property="linkEmail"></result>
         <result column="lkm_position" property="linkPosition"></result>
         <result column="lkm_memo" property="linkMemo"></result>
+        <result column="cust_id" property="belongCustomer.custId"></result>
+        <result column="cust_name" property="belongCustomer.custName"></result>
     </resultMap>
+
+    <select id="get" parameterType="String" resultMap="LinkManMap">
+        <include refid="querySQL"></include>
+        where lkm_id = #{linkId}
+    </select>
+
+    <select id="list" resultMap="LinkManMap">
+        <include refid="querySQL"></include>
+    </select>
+
+    <update id="update" parameterType="com.scau.crm.entity.LinkMan">
+        update t_linkman
+        set lkm_name = #{linkName},lkm_gender = #{linkGender},
+            lkm_phone = #{linkPhone},lkm_mobile = #{linkMobile},
+            lkm_email = #{linkEmail},clid = #{belongCustomer.custId}
+        where lkm_id = #{linkId}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        delete from t_linkman
+        where lkm_id = #{linkId}
+    </delete>
 </mapper>

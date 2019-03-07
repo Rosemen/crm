@@ -2,21 +2,53 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.scau.crm.mapper.CustomerMapper">
-    <select id="get" parameterType="String" resultMap="CustomerMap">
-      select * from t_customer where cust_id = #{custId}
-    </select>
-
-    <select id="list" resultMap="CustomerMap">
-        select * from t_customer
-    </select>
+    <sql id="querySQL">
+        SELECT c.cust_id,c.cust_name,c.cust_address,c.cust_phone,
+               bl.dict_item_name cust_level,
+               bl.dict_id cust_level_id,
+               bs.dict_item_name cust_source,
+               bs.dict_id cust_source_id,
+               bi.dict_item_name cust_industry,
+               bi.dict_id cust_industry_id
+        FROM t_customer c
+             INNER JOIN base_dict bl on c.cust_level = bl.dict_id
+             INNER JOIN base_dict bs on c.cust_source = bs.dict_id
+             INNER JOIN base_dict bi on c.cust_industry = bi.dict_id
+    </sql>
 
     <resultMap id="CustomerMap" type="com.scau.crm.entity.Customer">
         <id column="cust_id" property="custId"></id>
         <result column="cust_name" property="custName"></result>
         <result column="cust_address" property="custAddress"></result>
         <result column="cust_phone" property="custPhone"></result>
-        <result column="cust_source" property="custSource"></result>
-        <result column="cust_industry" property="custIndustry"></result>
-        <result column="cust_level" property="custLevel"></result>
+        <result column="cust_source" property="custSource.dictItemName"></result>
+        <result column="cust_source_id" property="custSource.dictId"></result>
+        <result column="cust_industry" property="custIndustry.dictItemName"></result>
+        <result column="cust_industry_id" property="custIndustry.dictId"></result>
+        <result column="cust_level" property="custLevel.dictItemName"></result>
+        <result column="cust_level_id" property="custLevel.dictId"></result>
     </resultMap>
+
+    <select id="get" parameterType="String" resultMap="CustomerMap">
+        <include refid="querySQL"></include>
+        where cust_id = #{custId}
+    </select>
+
+    <select id="list" resultMap="CustomerMap">
+        <include refid="querySQL"></include>
+    </select>
+
+    <update id="update" parameterType="com.scau.crm.entity.Customer">
+         update t_customer
+         set cust_name = #{custName},cust_phone = #{custPhone},
+             cust_source = #{custSource.dictId},
+             cust_industry = #{custIndustry.dictId},
+             cust_level = #{custLevel.dictId}
+         where cust_id = #{custId}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        delete from t_customer
+        where cust_id = #{custId}
+    </delete>
 </mapper>

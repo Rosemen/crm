@@ -25,4 +25,17 @@ public interface LinkManMapper {
      * @return List<LinkMan>
      */
     List<LinkMan> list();
+
+    /**
+     * 更新数据库中的联系人信息
+     * @param linkMan
+     */
+    void update(LinkMan linkMan);
+
+    /**
+     * 根据联系人Id从数据库中删除联系人信息
+     *
+     * @param linkId
+     */
+    void delete(String linkId);
 }

@@ -1,8 +1,8 @@
-﻿<!DOCTYPE HTML >
+<!DOCTYPE HTML >
 <HTML xmlns:th="http://www.thymeleaf.org">
 <HEAD id=Head1>
     <TITLE>顶部</TITLE>
-    <META http-equiv=Content-Type content="text/html; charset=utf-8">
+    <meta charset="UTF-8">
     <STYLE type=text/css>
         BODY {
             PADDING-RIGHT: 0px;
@@ -45,9 +45,9 @@
     <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
         <TBODY>
         <TR>
-            <TD width=10><IMG src="../images/new_001.jpg" border=0></TD>
-            <TD background=../images/new_002.jpg><FONT size=5><B>客户关系管理系统v1.0</B></FONT></TD>
-            <TD background=../images/new_002.jpg>
+            <TD width=10><IMG th:src="@{/images/new_001.jpg}" src="../images/new_001.jpg" border=0></TD>
+            <TD th:style="'background:url('+@{/images/new_002.jpg}+');'" background=../images/new_002.jpg><FONT size=5><B>客户关系管理系统v1.0</B></FONT></TD>
+            <TD th:style="'background:url('+@{/images/new_002.jpg}+');'" background=../images/new_002.jpg>
                 <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
                     <TBODY>
                     <TR>
@@ -65,7 +65,7 @@
                     </TBODY>
                 </TABLE>
             </TD>
-            <TD width=10><IMG src="../images/new_003.jpg" border=0></TD>
+            <TD width=10><IMG th:src="@{/images/new_003.jpg}" src="../images/new_003.jpg" border=0></TD>
         </TR>
         </TBODY>
     </TABLE>

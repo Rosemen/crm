@@ -60,7 +60,7 @@
         <TD width=15>
             <IMG th:src="@{/images/new_019.jpg}" src="/images/new_019.jpg" border=0>
         </TD>
-        <TD width="100%" th:style="'background:url('+@{/images/new_020.jpg}+');'" style="background: url('/images/new_020.jpg');height: 20px">
+        <TD width="100%" style="background: url('/images/new_020.jpg');height: 20px">
             <IMG th:src="@{/images/new_020.jpg}" src="/images/new_020.jpg" border=0>
         </TD>
         <TD width=15>
@@ -78,7 +78,7 @@
         <TD vAlign=top width="100%" bgColor=#ffffff>
             <TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
                 <TR>
-                    <TD class=manageHead>当前位置：客户管理 &gt; 客户列表</TD>
+                    <TD class=manageHead>当前位置：联系人管理 &gt; 联系人列表</TD>
                 </TR>
                 <TR>
                     <TD height=2></TD>
@@ -89,11 +89,11 @@
                 <TBODY>
                 <TR>
                     <TD height=25>
-                        <FORM id="pageForm" name="customerForm"
-                              action="#" th:action="@{/customer/list}"
+                        <FORM id="pageForm" name="linkManForm"
+                              action="#" th:action="@{/linkman/list}"
                               method=post>
                             <!-- 隐藏域.当前页码 -->
-                            <input type="hidden" name="pageNum" id="page_num"/>
+                            <input type="hidden" name="pageNum" id="page_num" value="1"/>
                             <!-- 隐藏域.每页显示条数 -->
                             <input type="hidden" name="pageSize" id="page_size" value="3"/>
                             <TABLE cellSpacing=0 cellPadding=2 border=0>
@@ -122,23 +122,23 @@
                                cellSpacing=1 cellPadding=2 rules=all border=0>
                             <TBODY>
                             <TR style="FONT-WEIGHT: bold; FONT-STYLE: normal; BACKGROUND-COLOR: #eeeeee; TEXT-DECORATION: none">
-                                <TD>客户名称</TD>
-                                <TD>客户级别</TD>
-                                <TD>客户来源</TD>
-                                <TD>客户行业</TD>
+                                <TD>联系人名称</TD>
+                                <TD>性别</TD>
+                                <TD>办公电话</TD>
                                 <TD>手机</TD>
+                                <TD>所属客户</TD>
                                 <TD>操作</TD>
                             </TR>
-                            <TR th:each="customer:${pageInfo.list}" style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
-                                <TD th:text="${customer.custName}"></TD>
-                                <TD th:text="${customer.custLevel.dictItemName}"></TD>
-                                <TD th:text="${customer.custSource.dictItemName}"></TD>
-                                <TD th:text="${customer.custIndustry.dictItemName}"></TD>
-                                <TD th:text="${customer.custPhone}"></TD>
+                            <TR th:each="linkman:${pageInfo.list}" style="FONT-WEIGHT: normal; FONT-STYLE: normal; BACKGROUND-COLOR: white; TEXT-DECORATION: none">
+                                <TD th:text="${linkman.linkName}"></TD>
+                                <TD th:text="${linkman.linkGender}== 1?'男':'女'"></TD>
+                                <TD th:text="${linkman.linkPhone}"></TD>
+                                <TD th:text="${linkman.linkMobile}"></TD>
+                                <TD th:text="${linkman.belongCustomer}!=null?${linkman.belongCustomer.custName}:''"></TD>
                                 <TD>
-                                    <a th:href="@{'/customer/get/'+${customer.custId}}" href="#">修改</a>
+                                    <a th:href="@{'/linkman/get/'+${linkman.linkId}}" href="#">修改</a>
                                     &nbsp;&nbsp;
-                                    <a th:href="@{'/customer/delete/'+${customer.custId}}" href="#">删除</a>
+                                    <a th:href="@{'/linkman/delete/'+${linkman.linkId}}" href="#">删除</a>
                                 </TD>
                             </TR>
                             </TBODY>

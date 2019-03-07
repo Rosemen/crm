@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改页面</title>
+    <meta charset="UTF-8">
+    <LINK th:href="@{/css/Style.css}" href="/css/Style.css" type=text/css rel=stylesheet>
+    <LINK th:href="@{/css/Manage.css}" href="/css/Manage.css" type=text/css rel=stylesheet>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        $(function ($) {
+            var levelDictId = [[${customer.custLevel.dictId}]];
+            var sourceDictId = [[${customer.custSource.dictId}]];
+            var industryDictId = [[${customer.custIndustry.dictId}]];
+            loadSelection("001", "customerLevel", "custLevel.dictId", levelDictId);
+            loadSelection("002", "customerSource", "custSource.dictId", sourceDictId);
+            loadSelection("003", "customerIndustry", "custIndustry.dictId", industryDictId);
+        });
+
+        /*
+        * 加载数字词典并回显客户信息
+        *
+        * @param
+        * dictType:数字词典类型
+        * parentId: <select>标签的父标签ID
+        * selectName:<select>标签的name属性
+        * dictId:数字词典条目ID
+        */
+        function loadSelection(dictType, parentId, selectName, dictId) {
+            var $select = $("<select name='" + selectName + "'></select>");
+            $select.append("<option value=''>---------  请选择     ---------</option>");
+            var url = [[@{/dict/list}]];
+            $.post(url, {"dictType": dictType},
+                function (baseDictList) {
+                    $.each(baseDictList, function (index, baseDict) {
+                        var $option = $("<option value='"+baseDict['dictId']+"'>"+baseDict["dictItemName"]+"</option>");
+                        if(dictId == baseDict["dictId"])
+                            $option.attr("selected","selected");
+                        $select.append($option);
+                    });
+                }, "json");
+            $("#"+parentId).append($select);
+        }
+    </script>
+</head>
+<body>
+<FORM id=form1 name=form1
+      action="#" th:action="@{/customer/update}"
+      method=post>
+
+    <input type="hidden" name="custId" th:value="${customer.custId}" value="">
+    <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+        <TBODY>
+        <TR>
+            <TD width=15><IMG th:src="@{/images/new_019.jpg}" src="/images/new_019.jpg"
+                              border=0></TD>
+            <TD width="100%" th:style="'background:url('+@{/images/new_020.jpg}+');'" background="/images/new_020.jpg"
+                height=20></TD>
+            <TD width=15><IMG th:src="@{/images/new_021.jpg}" src="/images/new_021.jpg"
+                              border=0></TD>
+        </TR>
+        </TBODY>
+    </TABLE>
+    <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+        <TBODY>
+        <TR>
+            <TD width=15 th:style="'background:url('+@{/images/new_022.jpg}+');'" background="/images/new_022.jpg"><IMG
+                    th:src="@{/images/new_022.jpg}" src="/images/new_022.jpg" border=0></TD>
+            <TD vAlign=top width="100%" bgColor=#ffffff>
+                <TABLE cellSpacing=0 cellPadding=5 width="100%" border=0>
+                    <TR>
+                        <TD class=manageHead>
+                            当前位置：客户管理 &gt; 修改客户
+                        </TD>
+                    </TR>
+                    <TR>
+                        <TD height=2></TD>
+                    </TR>
+                </TABLE>
+
+                <TABLE cellSpacing=0 cellPadding=5 border=0>
+
+
+                    <TR>
+                        <td>客户名称:</td>
+                        <td>
+                            <INPUT class=textbox id=sChannel2
+                                   style="WIDTH: 180px" maxLength=50 name="custName" th:value="${customer.custName}">
+                        </td>
+                        <td>客户级别:</td>
+                        <td id="customerLevel">
+                        </td>
+                    </TR>
+
+                    <TR>
+
+                        <td>信息来源:</td>
+                        <td id="customerSource">
+                        </td>
+                        <td>客户行业:</td>
+                        <td id="customerIndustry">
+                        </td>
+                    </TR>
+
+                    <TR>
+                        <td>手机电话:</td>
+                        <td>
+                            <INPUT class=textbox id=sChannel3
+                                   style="WIDTH: 180px" maxLength=50 name="custPhone" th:value="${customer.custPhone}">
+                        </td>
+                    </TR>
+                    <tr>
+                        <td rowspan=2>
+                            <INPUT class=button id=sButton2 type=submit
+                                   value=" 保存 " name=sButton2>
+                        </td>
+                    </tr>
+                </TABLE>
+            </TD>
+            <TD width=15 th:style="'background:url('+@{/images/new_023.jpg}+');'" background="/images/new_023.jpg">
+                <IMG th:src="@{/images/new_023.jpg}" src="/images/new_023.jpg" border=0></TD>
+        </TR>
+        </TBODY>
+    </TABLE>
+    <TABLE cellSpacing=0 cellPadding=0 width="98%" border=0>
+        <TBODY>
+        <TR>
+            <TD width=15><IMG th:src="@{/images/new_024.jpg}" src="/images/new_024.jpg"
+                              border=0></TD>
+            <TD align="middle" width="100%" th:style="'background:url('+@{/images/new_025.jpg}+');'"
+                background="/images/new_025.jpg" height=15></TD>
+            <TD width=15><IMG th:src="@{/images/new_026.jpg}" src="/images/new_026.jpg"
+                              border=0></TD>
+        </TR>
+        </TBODY>
+    </TABLE>
+</FORM>
+</body>
+</html>
